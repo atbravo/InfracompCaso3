@@ -45,7 +45,7 @@ public class Main
 		MessageDigest md = MessageDigest.getInstance("SHA-512");
 		byte[] hash = md.digest((cadena + v).getBytes(StandardCharsets.UTF_8));
 	 
-		String resultado = pasarAString(hash, 512);
+		String resultado = pasarAHexa(hash, 512);
 	  
 		System.out.println(resultado);
 	}
@@ -75,7 +75,7 @@ public class Main
 		
 	}
 	
-	public String pasarAString(byte[] hash, int algoritmo)
+	public String pasarAHexa(byte[] hash, int algoritmo)
 	{
 		int len = 0;
 		if(algoritmo == 256)
