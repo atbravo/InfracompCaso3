@@ -34,6 +34,7 @@ public class Main
 		return md.digest(cadena.getBytes(StandardCharsets.UTF_8));
 	}
 
+	//Ejemplo slack, borrar despues
 	public void visualizarEjemplo() throws NoSuchAlgorithmException
 	{
 		String cadena = "cadena inicial abc";
@@ -43,18 +44,10 @@ public class Main
 		System.out.println("V: " + v);
 		MessageDigest md = MessageDigest.getInstance("SHA-512");
 		byte[] hash = md.digest((cadena + v).getBytes(StandardCharsets.UTF_8));
-		  BigInteger number = new BigInteger(1, hash); 
-		  
-	        // Convert message digest into hex value 
-	        StringBuilder hexString = new StringBuilder(number.toString(16)); 
+	 
+		String resultado = pasarAString(hash, 512);
 	  
-	        // Pad with leading zeros
-	        while (hexString.length() < 128) 
-	        { 
-	            hexString.insert(0, '0'); 
-	        } 
-	  
-		System.out.println(hexString);
+		System.out.println(resultado);
 	}
 
 	public static void main(String args[])
@@ -80,5 +73,25 @@ public class Main
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String pasarAString(byte[] hash, int algoritmo)
+	{
+		int len = 0;
+		if(algoritmo == 256)
+			len = 64;
+		else if(algoritmo == 512)
+			len = 128;
+		BigInteger number = new BigInteger(1, hash); 
+		  
+        // Convert message digest into hex value 
+        StringBuilder hexString = new StringBuilder(number.toString(16)); 
+  
+        // Pad with leading zeros
+        while (hexString.length() < len) 
+        { 
+            hexString.insert(0, '0'); 
+        }
+        return hexString.toString();
 	}
 }
