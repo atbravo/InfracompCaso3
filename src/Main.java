@@ -50,10 +50,15 @@ public class Main
 				Date date = new Date();
 				main.leerDatos();
 				long inicio = System.nanoTime();
+				Minador[] threads = new Minador[26];
 				for (int i = 0; i < 26; i++)
 				{
-					Minador minador = new Minador(main.inicial, main.algoritmo, main.numCeros, busqueda[i]+"");
-					minador.run();
+					threads[i] = new Minador(main.inicial, main.algoritmo, main.numCeros, busqueda[i]+"");
+					threads[i].start();
+				}
+				for(Minador thread : threads)
+				{
+					thread.join();
 				}
 				long tiempo = System.nanoTime() - inicio;
 				System.out.println("Tiempo de busqueda:" + tiempo/1000000000 + " segundos");

@@ -99,7 +99,6 @@ public class Minador extends Thread
 		}
 	}
 
-	@Override
 	public void run()
 	{
 		try
